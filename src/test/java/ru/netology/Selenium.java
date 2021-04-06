@@ -1,25 +1,40 @@
 package ru.netology;
 
-import org.junit.jupiter.api.*;
-
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Selenium {
     private WebDriver driver;
 
-          @BeforeAll
-          static void setUpAll() {
-          System.setProperty("webdriver.chrome.driver","./driver/mac/chromedriver");
+    @BeforeAll
+    static void setUpAll() {
+        WebDriverManager.chromedriver().setup();
     }
-           @BeforeEach
-           void setUp() {
-                driver = new ChromeDriver();
+
+    @BeforeEach
+    public void setupTest() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        options.addArguments("disable-infobars");
+        options.addArguments("--headless");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        driver = new ChromeDriver(options);
     }
+
            @AfterEach
            void tearDown() {
                 driver.quit();
@@ -67,15 +82,15 @@ public class Selenium {
                 assertEquals("Поле обязательно для заполнения", text.trim());
             }
 
-            @Test
-            void shouldNotSubmitUncheckedChekbox() {
-                driver.get("http://localhost:9999");
-                driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Василий Васильев");
-                driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7666666666");
-                driver.findElement(By.cssSelector("[type=button]")).submit();
-                String text = driver.findElement(By.cssSelector(".input_invalid[data-test-id=agreement] .checkbox__text")).getText();
-                assertEquals("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй", text.trim());
-            }
+       //     @Test
+        //    void shouldNotSubmitUncheckedCheсkbox() {
+        //        driver.get("http://localhost:9999");
+         //       driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Василий Васильев");
+         //       driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7666666666");
+          //      driver.findElement(By.cssSelector("[type=button]")).submit();
+          //      String text = driver.findElement(By.cssSelector(".input_invalid[data-test-id=agreement] .checkbox__text")).getText();
+          //      assertEquals("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй", text.trim());
+          //  }
 
         }
 
