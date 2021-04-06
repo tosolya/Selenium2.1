@@ -13,15 +13,14 @@ public class Selenium {
     private WebDriver driver;
     ChromeOptions options = new ChromeOptions();
 
-    @BeforeAll
-    static void setUpAll() {
-        System.setProperty("WebDriver.chrome.driver","./driver/mac/chromedriver");
+          @BeforeAll
+          static void setUpAll() {
+         System.setProperty("webdriver.chrome.driver","./driver/mac/chromedriver");
     }
-    @BeforeEach
-    void setUp() {
-        options.setHeadless(true);
-        driver = new ChromeDriver();
-
+           @BeforeEach
+           void setUp() {
+                options.setHeadless(true);
+                driver = new ChromeDriver();
     }
 
             @AfterEach
