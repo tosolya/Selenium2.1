@@ -11,23 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Selenium {
     private WebDriver driver;
-    ChromeOptions options = new ChromeOptions();
 
           @BeforeAll
           static void setUpAll() {
-         System.setProperty("webdriver.chrome.driver","./driver/mac/chromedriver");
+          System.setProperty("webdriver.chrome.driver","./driver/mac/chromedriver");
     }
            @BeforeEach
            void setUp() {
-                options.setHeadless(true);
                 driver = new ChromeDriver();
     }
-
-            @AfterEach
-            void tearDown() {
+           @AfterEach
+           void tearDown() {
                 driver.quit();
                 driver = null;
-            }
+           }
             @Test
             void shouldSendForm() {
                 driver.get("http://localhost:9999");
