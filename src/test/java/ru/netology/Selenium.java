@@ -69,7 +69,7 @@ public class Selenium {
         driver.findElement(By.cssSelector("[data-test-id=agreement] .checkbox__box")).click();
         driver.findElement(By.cssSelector("[type=button]")).submit();
         String text = driver.findElement(By.cssSelector(".input_invalid[data-test-id=phone] .input__sub")).getText();
-        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012389678.", text.trim());
+        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", text.trim());
     }
 
     @Test
